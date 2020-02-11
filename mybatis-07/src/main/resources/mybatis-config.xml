@@ -7,7 +7,7 @@
     <!--引入外部配置文件-->
     <properties resource="db.properties">
         <property name="username" value="root"/>
-        <property name="password" value="Cc105481"/>
+        <property name="password" value="admin"/>
     </properties>
 
     <!--标准日志工厂实现-->
@@ -21,8 +21,8 @@
 
     <!--可以给实体类起别名-->
     <typeAliases>
-<!--        <typeAlias type="rui.pojo.User" alias="User"/>-->
-<!--        <package name="com.rui.pojo"/>-->
+<!--        <typeAlias type="kk.pojo.User" alias="User"/>-->
+<!--        <package name="com.kk.pojo"/>-->
     </typeAliases>
     <!--environments配置环境组-->
     <!--default默认环境-->
@@ -42,7 +42,7 @@
     </environments>
 
     <mappers>
-        <mapper class="com.rui.dao.TeacherMapper"/>
-        <mapper class="com.rui.dao.StudentMapper"/>
+        <mapper class="com.kk.dao.TeacherMapper"/>
+        <mapper class="com.kk.dao.StudentMapper"/>
     </mappers>
 </configuration>

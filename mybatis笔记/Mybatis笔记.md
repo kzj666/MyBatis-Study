@@ -128,7 +128,7 @@ INSERT INTO `user` (`id`,`name`,`pwd`) VALUES
     <modelVersion>4.0.0</modelVersion>
 
     <!--父工程-->
-    <groupId>com.rui</groupId>
+    <groupId>com.kk</groupId>
     <artifactId>MyBatis-Study</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -203,9 +203,9 @@ INSERT INTO `user` (`id`,`name`,`pwd`) VALUES
               <!--配置连接池-->
               <dataSource type="POOLED">
                   <property name="driver" value="com.mysql.jdbc.Driver"/>
-                  <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UFT-8"/>
+                  <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=true&amp;useUnicode=true&amp;serverTimezone=UTC&amp;characterEncoding=UFT-8"/>
                   <property name="username" value="root"/>
-                  <property name="password" value="Cc105481"/>
+                  <property name="password" value="admin"/>
               </dataSource>
           </environment>
       </environments>
@@ -218,7 +218,7 @@ INSERT INTO `user` (`id`,`name`,`pwd`) VALUES
 - 编写mybatis工具类
 
 ```java
-package com.rui.utils;
+package com.kk.utils;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -258,7 +258,7 @@ public class MyBatisUtils {
 - 实体类
 
   ```java
-  package com.rui.pojo;
+  package com.kk.pojo;
   
   public class user {
       private int id;
@@ -314,9 +314,9 @@ public class MyBatisUtils {
 - Dao接口
 
   ```java
-  package com.rui.dao;
+  package com.kk.dao;
   
-  import com.rui.pojo.User;
+  import com.kk.pojo.User;
   
   import java.util.List;
   
@@ -336,9 +336,9 @@ public class MyBatisUtils {
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace=绑定一个对应的mapper接口-->
-<mapper namespace="com.rui.dao.UserDao">
+<mapper namespace="com.kk.dao.UserDao">
     <!--select查询语句-->
-   <select id="getUserList" resultType="com.rui.pojo.User">
+   <select id="getUserList" resultType="com.kk.pojo.User">
        /*定义sql*/
        select * from mybatis.user
    </select>
@@ -349,7 +349,7 @@ public class MyBatisUtils {
 
  注意点：
 
-org.apache.ibatis.binding.BindingException: Type interface com.rui.dao.UserDao is not known to the MapperRegistry.
+org.apache.ibatis.binding.BindingException: Type interface com.kk.dao.UserDao is not known to the MapperRegistry.
 
 MapperRegistry是什么?
 
@@ -358,11 +358,11 @@ MapperRegistry是什么?
 - junit测试
 
   ```java
-  package com.rui;
+  package com.kk;
   
-  import com.rui.dao.UserDao;
-  import com.rui.pojo.User;
-  import com.rui.utils.MyBatisUtils;
+  import com.kk.dao.UserDao;
+  import com.kk.pojo.User;
+  import com.kk.utils.MyBatisUtils;
   import org.apache.ibatis.session.SqlSession;
   import org.junit.Test;
   
@@ -413,9 +413,9 @@ namespace中的包名要和Dao/mapper接口的包名保持一致
 1. 编写接口
 
    ```java
-   package com.rui.dao;
+   package com.kk.dao;
    
-   import com.rui.pojo.User;
+   import com.kk.pojo.User;
    
    import java.util.List;
    
@@ -431,7 +431,7 @@ namespace中的包名要和Dao/mapper接口的包名保持一致
 2. 编写对应的mapper中的sql语句
 
    ```java
-    <select id="getUserById" resultType="com.rui.pojo.User" parameterType="int">
+    <select id="getUserById" resultType="com.kk.pojo.User" parameterType="int">
           /*定义sql*/
           select * from mybatis.user where id = #{id};
       </select>
@@ -579,9 +579,9 @@ db.properties
 ```properties
 driver=com.mysql.jdbc.Driver
 url=jdbc:mysql://localhost:3306/mybatis?
-useSSL=true&useUnicode=true&characterEncoding=utf8
+useSSL=true&useUnicode=true&serverTimezone=UTC&characterEncoding=utf8
 username=root
-password=Cc105481
+password=admin
 ```
 
 
@@ -594,7 +594,7 @@ password=Cc105481
  <!--引入外部配置文件-->
     <properties resource="db.properties">
         <property name="username" value="root"/>
-        <property name="password" value="Cc105481"/>
+        <property name="password" value="admin"/>
     </properties>
    
 ```
@@ -612,7 +612,7 @@ password=Cc105481
   ```xml
       <!--可以给实体类起别名-->
       <typeAliases>
-          <typeAlias type="com.rui.pojo.User" alias="User"/>
+          <typeAlias type="com.kk.pojo.User" alias="User"/>
       </typeAliases>
   ```
 
@@ -623,7 +623,7 @@ password=Cc105481
   ```xml
    <!--可以给实体类起别名-->
       <typeAliases>
-          <package name="com.rui.pojo"/>
+          <package name="com.kk.pojo"/>
       </typeAliases>
   ```
 
@@ -816,20 +816,30 @@ id name password
 2.log4j.properties
 
 ```properties
-log4j.rootLogger=debug, stdout, R
-log4j.appender.stdout=org.apache.log4j.ConsoleAppender
-log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-# Pattern to output the caller's file name and line number.
-log4j.appender.stdout.layout.ConversionPattern=%5p [%t] (%F:%L) - %m%n
-log4j.appender.R=org.apache.log4j.RollingFileAppender
-log4j.appender.R.File=example.log
-log4j.appender.R.MaxFileSize=100KB
-# Keep one backup file
-log4j.appender.R.MaxBackupIndex=5
-log4j.appender.R.layout=org.apache.log4j.PatternLayout
-log4j.appender.R.layout.ConversionPattern=%p %t %c - %m%n
+#将等级为DEBUG的日志信息输出到console和file这两个目的地，console和file的定义在下面的代码
+log4j.rootLogger=debug, console, file
 
+#控制台输出的相关设置
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.Target=System.out
+log4j.appender.console.Threshold=DEBUG
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%5p [%t] (%F:%L) - %m%n
 
+#文件输出的相关设置
+log4j.appender.file=org.apache.log4j.RollingFileAppender
+log4j.appender.file.File=./log/kk.log
+log4j.appender.file.MaxFileSize=10mb
+log4j.appender.file.Threshold=DEBUG
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.layout.ConversionPattern=[%p][%d{yyyy-MM-dd}] [%c] - %m%n
+
+#日志输出级别
+log4j.logger.org.mybatis=DEBUG
+log4j.logger.java.sql=DEBUG
+log4j.logger.java.sql.Statement=DEBUG
+log4j.logger.java.sql.ResultSet=DEBUG
+log4j.logger.java.sql.PreparedStatement=DEBUG
 
 
 ```
@@ -975,7 +985,7 @@ select * from user limit startIndex,pageSize
        RowBounds rowBounds = new RowBounds(1, 2);
    
        //通过java代码层面实现分页
-       List<User> userList = sqlSession.selectList("com.rui.dao.UserMapper.getUserByRowBounds",null,rowBounds);
+       List<User> userList = sqlSession.selectList("com.kk.dao.UserMapper.getUserByRowBounds",null,rowBounds);
    
        for (User user : userList) {
            System.out.println(user);
@@ -1012,7 +1022,7 @@ select * from user limit startIndex,pageSize
    ```XML
    <!--绑定接口-->
    <mappers>
-       <mapper class="rui.dao.UserMapper"/>
+       <mapper class="kk.dao.UserMapper"/>
    </mappers>
    ```
 
@@ -1216,12 +1226,12 @@ INSERT INTO student(`id`,`name`,`tid`) VALUES (5,'小王',1);
 select * from student
 </select>
 
-<resultMap id="StudentTeacher" type="com.rui.pojo.Student">
+<resultMap id="StudentTeacher" type="com.kk.pojo.Student">
     <!--复杂的属性，我们需要单独处理  对象：association  集合：collection-->
-    <association property="teacher" column="tid" javaType="com.rui.pojo.Teacher" select="getTeacher"/>
+    <association property="teacher" column="tid" javaType="com.kk.pojo.Teacher" select="getTeacher"/>
 </resultMap>
 
-<select id="getTeacher" resultType="com.rui.pojo.Teacher">
+<select id="getTeacher" resultType="com.kk.pojo.Teacher">
     select * from teacher where id = #{id}
 </select>
 ```
@@ -1238,10 +1248,10 @@ select * from student
     where s.tid=t.id;
 </select>
 
-<resultMap id="StudentTeacher2" type="com.rui.pojo.Student">
+<resultMap id="StudentTeacher2" type="com.kk.pojo.Student">
     <result property="id" column="sid"/>
     <result property="name" column="sname"/>
-    <association property="teacher" javaType="com.rui.pojo.Teacher">
+    <association property="teacher" javaType="com.kk.pojo.Teacher">
         <result property="id" column="tid"></result>
         <result property="name" column="tname"></result>
     </association>
@@ -1300,14 +1310,14 @@ public class Student {
     from student s,teacher t
     where s.tid=t.id and t.id = #{tid}
 </select>
-<resultMap id="TeacherStudent" type="com.rui.pojo.Teacher">
+<resultMap id="TeacherStudent" type="com.kk.pojo.Teacher">
     <result property="id" column="tid"/>
     <result property="name" column="tname"/>
     <!--复杂的属性，我们需要单独处理  对象：association  集合：collection
         javaType="" 指定属性的类型
         集合中的泛型信息，我们使用ofType获取
     -->
-    <collection property="students" ofType="com.rui.pojo.Student">
+    <collection property="students" ofType="com.kk.pojo.Student">
         <result property="id" column="sid"/>
         <result property="name" column="sname"/>
         <result property="tid" column="tid"/>
@@ -1325,11 +1335,11 @@ public class Student {
 <select id="getTeacher2" resultMap="TeacherStudent2">
     select * from mybatis.teacher where id = #{tid}
 </select>
-<resultMap id="TeacherStudent2" type="com.rui.pojo.Teacher">
-    <collection property="students" javaType="ArrayList" ofType="com.rui.pojo.Student" select="getStudentByTeacherId" column="id"/>
+<resultMap id="TeacherStudent2" type="com.kk.pojo.Teacher">
+    <collection property="students" javaType="ArrayList" ofType="com.kk.pojo.Student" select="getStudentByTeacherId" column="id"/>
 </resultMap>
 
-<select id="getStudentByTeacherId" resultType="com.rui.pojo.Student">
+<select id="getStudentByTeacherId" resultType="com.kk.pojo.Student">
     select * from mybatis.student where tid = #{tid}
 </select>
 ```
@@ -1414,7 +1424,7 @@ CREATE TABLE `bolg`(
 ## IF
 
 ```XML
-<select id="queryBlogIF" parameterType="map" resultType="com.rui.pojo.Blog">
+<select id="queryBlogIF" parameterType="map" resultType="com.kk.pojo.Blog">
     select * from mybatis.bolg where 1=1
     <if test="title != null">
         and title = #{title}
@@ -1445,7 +1455,7 @@ public void queryBlogIF(){
 ## choose (when, otherwise)
 
 ```XML
-<select id="queryBlogChoose" parameterType="map" resultType="com.rui.pojo.Blog">
+<select id="queryBlogChoose" parameterType="map" resultType="com.kk.pojo.Blog">
     select * from mybatis.bolg
     <where>
         <choose>
@@ -1526,7 +1536,7 @@ Where,set,choose,when
 2. 在需要使用的地方使用Include标签引用即可
 
    ```XML
-   <select id="queryBlogIF" parameterType="map" resultType="com.rui.pojo.Blog">
+   <select id="queryBlogIF" parameterType="map" resultType="com.kk.pojo.Blog">
        select * from mybatis.bolg
        <where>
            <include refid="if-title-author"></include>
@@ -1563,7 +1573,7 @@ Where,set,choose,when
    
    我们现在传递一个万能的map，这个map中可以存在一个map
    -->
-   <select id="queryBlogForeach" parameterType="map" resultType="com.rui.pojo.Blog">
+   <select id="queryBlogForeach" parameterType="map" resultType="com.kk.pojo.Blog">
        select * from mybatis.bolg
    
        <where>
@@ -1687,7 +1697,7 @@ Where,set,choose,when
    1. 问题：我们需要将实体类序列化！否则就会报错
 
       ```java
-       java.io.NotSerializableException: com.rui.pojo.User
+       java.io.NotSerializableException: com.kk.pojo.User
       ```
 
       

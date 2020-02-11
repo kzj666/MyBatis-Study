@@ -5,24 +5,22 @@
 <!--configuration核心配置文件-->
 <configuration>
     <!--引入外部配置文件-->
-    <properties resource="db.properties">
-        <property name="username" value="root"/>
-        <property name="password" value="Cc105481"/>
-    </properties>
+    <properties resource="db.properties" />
+
 
     <!--标准日志工厂实现-->
-    <settings>
+    <!--<settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
-    </settings>
-   <!-- <settings>
-        <setting name="logImpl" value="LOG4J"/>
     </settings>-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
 
 
     <!--可以给实体类起别名-->
     <typeAliases>
-        <typeAlias type="rui.pojo.User" alias="User"/>
-<!--        <package name="com.rui.pojo"/>-->
+        <typeAlias type="kk.pojo.User" alias="User"/>
+<!--        <package name="com.kk.pojo"/>-->
     </typeAliases>
     <!--environments配置环境组-->
     <!--default默认环境-->
@@ -43,6 +41,6 @@
 
     <!--绑定接口-->
     <mappers>
-        <mapper class="rui.dao.UserMapper"/>
+        <mapper class="kk.dao.UserMapper"/>
     </mappers>
 </configuration>
