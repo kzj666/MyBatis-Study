@@ -1,21 +1,19 @@
 /*
- Navicat Premium Data Transfer
+Navicat MySQL Data Transfer
 
- Source Server         : 本地
- Source Server Type    : MySQL
- Source Server Version : 80018
- Source Host           : localhost:3306
- Source Schema         : mybatis
+Source Server         : localhost_3306
+Source Server Version : 80018
+Source Host           : localhost:3306
+Source Database       : mybatis
 
- Target Server Type    : MySQL
- Target Server Version : 80018
- File Encoding         : 65001
+Target Server Type    : MYSQL
+Target Server Version : 80018
+File Encoding         : 65001
 
- Date: 05/12/2019 17:56:22
+Date: 2020-02-12 15:03:30
 */
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
 -- Table structure for bolg
@@ -32,12 +30,11 @@ CREATE TABLE `bolg` (
 -- ----------------------------
 -- Records of bolg
 -- ----------------------------
-BEGIN;
-INSERT INTO `bolg` VALUES ('1', 'Mybatis如此简单', '尹锐', '2019-12-04 20:32:07', 9999);
-INSERT INTO `bolg` VALUES ('2', 'Java如此简单2', '尹锐2', '2019-12-04 20:32:07', 1000);
-INSERT INTO `bolg` VALUES ('3', 'Spring如此简单', '尹锐', '2019-12-04 20:32:07', 9999);
-INSERT INTO `bolg` VALUES ('4', '微服务如此简单', '尹锐', '2019-12-04 20:32:07', 9999);
-COMMIT;
+INSERT INTO `bolg` VALUES ('1', 'Mybatis如此简单', 'kzj', '2019-12-04 20:32:07', '9999');
+INSERT INTO `bolg` VALUES ('2', 'Java如此简单2', 'kzj2', '2019-12-04 20:32:07', '1000');
+INSERT INTO `bolg` VALUES ('3', 'Spring如此简单', 'kzj', '2019-12-04 20:32:07', '9999');
+INSERT INTO `bolg` VALUES ('4', '微服务如此简单', 'kzj', '2019-12-04 20:32:07', '9999');
+INSERT INTO `bolg` VALUES ('5', 'Mybatis如此简单', 'kzj2', '2020-02-11 03:38:23', '4565');
 
 -- ----------------------------
 -- Table structure for student
@@ -55,13 +52,11 @@ CREATE TABLE `student` (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-BEGIN;
-INSERT INTO `student` VALUES (1, '小明', 1);
-INSERT INTO `student` VALUES (2, '小红', 1);
-INSERT INTO `student` VALUES (3, '小张', 1);
-INSERT INTO `student` VALUES (4, '小李', 1);
-INSERT INTO `student` VALUES (5, '小王', 1);
-COMMIT;
+INSERT INTO `student` VALUES ('1', '小明', '1');
+INSERT INTO `student` VALUES ('2', '小红', '1');
+INSERT INTO `student` VALUES ('3', '小张', '1');
+INSERT INTO `student` VALUES ('5', '小王', '1');
+INSERT INTO `student` VALUES ('6', '小康', '2');
 
 -- ----------------------------
 -- Table structure for teacher
@@ -76,9 +71,9 @@ CREATE TABLE `teacher` (
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-BEGIN;
-INSERT INTO `teacher` VALUES (1, '秦老师');
-COMMIT;
+INSERT INTO `teacher` VALUES ('1', '秦老师');
+INSERT INTO `teacher` VALUES ('2', '陈老师');
+INSERT INTO `teacher` VALUES ('3', '李老师');
 
 -- ----------------------------
 -- Table structure for user
@@ -94,11 +89,9 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-BEGIN;
-INSERT INTO `user` VALUES (1, '狂神', '123456');
-INSERT INTO `user` VALUES (2, '张三', '123456');
-INSERT INTO `user` VALUES (3, '李四', '123890');
-INSERT INTO `user` VALUES (4, '王五', '23333');
-COMMIT;
-
-SET FOREIGN_KEY_CHECKS = 1;
+INSERT INTO `user` VALUES ('1', '狂神', '123456');
+INSERT INTO `user` VALUES ('2', 'kk', '123456');
+INSERT INTO `user` VALUES ('3', '李四', '123890');
+INSERT INTO `user` VALUES ('5', '小王', '23234');
+INSERT INTO `user` VALUES ('6', '小王', '23234');
+INSERT INTO `user` VALUES ('7', '王五', '23333');
